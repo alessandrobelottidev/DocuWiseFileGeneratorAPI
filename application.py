@@ -1,8 +1,9 @@
 # General
 import os
+import uuid
 
 # Flask
-from flask import Flask, make_response
+from flask import Flask, make_response, render_template
 
 # Dotenv
 from dotenv import load_dotenv
@@ -49,23 +50,20 @@ def status():
     return dict(message="OK - healthy")
 
 
-@application.get("/test/pdf")
-def test_pdf():
-    html = """
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Test</title>
-        </head>
-        <body>
-            <h1>Test</h1>
-            <p>Test</p>
-        </body>
-    </html>
-    """
-    response = make_response(pdfkit.from_string(html, False, options=wkh2p_options))
+@application.post("/generatePDF")
+@validate()
+def generate_pdf(body: models.Body):
+    invoice_theme = body.fattura.theme.lower()
+    html = render_template(f"{invoice_theme}.html", azienda=body.azienda, fattura=body.fattura)
+    css = f"./static/{invoice_theme}.css"
 
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename=test.pdf'
+    pdf = pdfkit.from_string(input=html, output_path=False, css=css, options=wkh2p_options)
+    pdf_id = str(uuid.uuid4())
 
-    return response
+    try:
+        bucket.put_object(Body=pdf, Key=pdf_id, ContentType='application/pdf')
+    except Exception as e:
+        print(e)
+        return make_response("", 500)
+
+    return make_response(pdf_id, 200)
