@@ -1,0 +1,53 @@
+<head>
+	<meta name="" charset="UTF-8" />
+</head>
+
+<div id="invoice">
+	<div class="block business">
+		<h1>{{ azienda.nomeAzienda }}</h1>
+		<p>{{ azienda.indirizzoResidenzaFiscale }}</p>
+		<p>{{ azienda.indirizzoResidenzaCitta }}</p>
+		<p>P.I. {{ azienda.pIva }}</p>
+	</div>
+
+	<div class="block header">
+		<p>Fattura N° {{ fattura.numeroFattura }}</p>
+		<p>30/10/22</p>
+	</div>
+
+	<div class="block client">
+		<p class="divider">Fatturare a</p>
+		<p style="margin-bottom: 10px">{{ fattura.nominativo }}</p>
+		<p><b>Via</b></p>
+		<p>{{ fattura.indirizzoResidenza }} {{ fattura.capResidenza }}</p>
+		<p style="margin-bottom: 10px">{{ fattura.cittaResidenza }}</p>
+		<p><b>P.I.</b></p>
+		<p style="margin-bottom: 10px">{{ fattura.pIva }}</p>
+		<p><b>Cod. Fiscale</b></p>
+		<p>{{ fattura.codiceFiscale }}</p>
+	</div>
+
+	<div class="block total_header">
+		<p>COMPENSO PROFESSIONALE PER:</p>
+	</div>
+
+	<p class="total_divider">{{ fattura.lavoroSvolto }}</p>
+
+	<div class="block total_invoice">
+		<div>
+			<p>TOTALE</p>
+		</div>
+		<div>
+			<p>{{ fattura.totale }}€</p>
+		</div>
+	</div>
+
+	<p class="block legal">
+		Operazione effettuata ex art. 1 c. 54-89 L. 190/2014 così come modificato
+		dalla Legge n. 208/2015. Regime forfettario in franchigia di iva e non
+		soggetta a ritenuta d'acconto - Imposta di bollo da 2 euro assolta
+		sull'originale per importi maggiori di 77,47 euro.
+		<br /><br />
+		Marca da bollo id:
+	</p>
+</div>

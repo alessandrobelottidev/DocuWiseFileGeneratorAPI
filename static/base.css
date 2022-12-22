@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: 'Unbounded', cursive;
+}
+
+#invoice .block {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.6rem;
+}
+
+.business h1, .business p {
+    padding-bottom: 10px;
+}
+
+.header {
+    display: flex;
+    display: -webkit-box; /* wkhtmltopdf uses this one */
+    justify-content: space-between;
+    -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+    background-color: #15803d;
+    color: #fff;
+    padding: 10px;
+}
+
+.client .divider {
+    color: #15803d;
+    padding: 0px 10px 10px 10px;
+    border-bottom: 1px solid #15803d;
+    margin-bottom: 10px;
+}
+
+.client > p {
+    padding-bottom: 10px;
+}
+
+.client b {
+    padding-bottom: 20px;
+}
+
+.total_header {
+    display: flex;
+    display: -webkit-box; /* wkhtmltopdf uses this one */
+    justify-content: space-between;
+    -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+    background-color: #15803d;
+    color: #fff;
+    padding: 10px;
+}
+
+.total_divider {
+    padding: 0px 10px 10px 10px;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+}
+
+.total_invoice {
+    display: flex;
+    display: -webkit-box; /* wkhtmltopdf uses this one */
+    justify-content: space-between;
+    -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+}
+
+.total_invoice div {
+    flex: 1;
+    -webkit-box-flex: 1; /* wkhtmltopdf uses this one */
+}
+
+.total_invoice div p {
+    text-align: right;
+}
+
+.legal {
+    margin-top: 80px;
+}
