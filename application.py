@@ -18,6 +18,9 @@ from flask_pydantic import validate
 # Pdfkit for converting html to pdf
 import pdfkit
 
+# Imgkit for converting html to image
+import imgkit
+
 # Load environment variables
 load_dotenv()
 
@@ -44,6 +47,14 @@ wkh2p_options = {
     'encoding': "UTF-8",
 }
 
+# Imgkit config
+wkh2i_options = {
+    'width': 1050,
+    'height': 1485,
+    'format': 'jpg',
+    'encoding': "UTF-8",
+}
+
 
 @application.get("/status")
 def status():
@@ -67,3 +78,22 @@ def generate_pdf(body: models.Body):
         return make_response("", 500)
 
     return make_response(pdf_id, 200)
+
+
+@application.post("/generateJPEG")
+@validate()
+def generate_jpeg(body: models.Body):
+    invoice_theme = body.fattura.theme.lower()
+    html = render_template(f"{invoice_theme}.html", azienda=body.azienda, fattura=body.fattura)
+    css = f"./static/{invoice_theme}-2.css"
+
+    image = imgkit.from_string(string=html, output_path=False, css=css, options=wkh2i_options)
+    image_id = str(uuid.uuid4())
+
+    try:
+        bucket.put_object(Body=image, Key=image_id, ContentType='image/jpeg')
+    except Exception as e:
+        print(e)
+        return make_response("", 500)
+
+    return make_response(image_id, 200)
