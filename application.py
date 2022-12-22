@@ -66,7 +66,7 @@ def status():
 def generate_pdf(body: models.Body):
     invoice_theme = body.fattura.theme.lower()
     html = render_template(f"{invoice_theme}.html", azienda=body.azienda, fattura=body.fattura)
-    css = f"./static/{invoice_theme}.css"
+    css = f"./static/{invoice_theme}PDF.css"
 
     pdf = pdfkit.from_string(input=html, output_path=False, css=css, options=wkh2p_options)
     pdf_id = str(uuid.uuid4())
@@ -85,7 +85,7 @@ def generate_pdf(body: models.Body):
 def generate_jpeg(body: models.Body):
     invoice_theme = body.fattura.theme.lower()
     html = render_template(f"{invoice_theme}.html", azienda=body.azienda, fattura=body.fattura)
-    css = f"./static/{invoice_theme}-2.css"
+    css = f"./static/{invoice_theme}JPEG.css"
 
     image = imgkit.from_string(string=html, output_path=False, css=css, options=wkh2i_options)
     image_id = str(uuid.uuid4())
