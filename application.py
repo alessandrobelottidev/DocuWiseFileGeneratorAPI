@@ -1,4 +1,8 @@
+# Flask
 from flask import Flask, make_response
+
+# Dotenv
+from dotenv import load_dotenv
 
 # Pydantic models
 import models
@@ -6,6 +10,9 @@ from flask_pydantic import validate
 
 # Pdfkit for converting html to pdf
 import pdfkit
+
+# Load environment variables
+load_dotenv()
 
 # Create a new Flask app instance
 application = Flask(__name__)
