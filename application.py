@@ -1,5 +1,9 @@
 from flask import Flask, make_response
 
+# Pydantic models
+import models
+from flask_pydantic import validate
+
 # Pdfkit for converting html to pdf
 import pdfkit
 
