@@ -97,3 +97,13 @@ def generate_jpeg(body: models.Body):
         return make_response("", 500)
 
     return make_response(image_id, 200)
+
+
+@application.errorhandler(404)
+def page_not_found(e):
+    return make_response(dict(message="404 Not Found"), 404)
+
+
+@application.errorhandler(500)
+def page_not_found(e):
+    return make_response(dict(message="500 Internal Server Error"), 500)
