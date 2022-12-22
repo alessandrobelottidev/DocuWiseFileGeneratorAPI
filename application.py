@@ -1,8 +1,14 @@
+# General
+import os
+
 # Flask
 from flask import Flask, make_response
 
 # Dotenv
 from dotenv import load_dotenv
+
+# AWS S3 SDK
+import boto3
 
 # Pydantic models
 import models
@@ -13,6 +19,16 @@ import pdfkit
 
 # Load environment variables
 load_dotenv()
+
+# AWS S3 setup
+s3 = boto3.resource(
+    service_name='s3',
+    region_name=os.environ.get('AWS_DEFAULT_REGION'),
+    aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
+    aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
+)
+bucket = s3.Bucket(os.environ.get('AWS_BUCKET_NAME'))
+
 
 # Create a new Flask app instance
 application = Flask(__name__)
