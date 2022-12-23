@@ -15,7 +15,7 @@ class Fattura(BaseModel):
     capResidenza: str
     cittaResidenza: str
     pIva: str
-    codiceFiscale: str
+    codFiscale: str
     lavoroSvolto: str
     totale: str
     theme: str
