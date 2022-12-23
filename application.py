@@ -77,7 +77,7 @@ def generate_pdf(body: models.Body):
         print(e)
         return make_response("", 500)
 
-    return make_response(pdf_id, 200)
+    return make_response(dict(uuid=pdf_id), 200)
 
 
 @application.post("/generateJPEG")
@@ -96,7 +96,7 @@ def generate_jpeg(body: models.Body):
         print(e)
         return make_response("", 500)
 
-    return make_response(image_id, 200)
+    return make_response(dict(uuid=image_id), 200)
 
 
 @application.errorhandler(404)
