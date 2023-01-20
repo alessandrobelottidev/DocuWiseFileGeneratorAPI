@@ -11,6 +11,7 @@ class Azienda(BaseModel):
 class Fattura(BaseModel):
     numeroFattura: str
     nominativo: str
+    data: str
     indirizzoResidenza: str
     capResidenza: str
     cittaResidenza: str
